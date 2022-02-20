@@ -13,14 +13,14 @@ The following commands do this for your, when run from the project's root direct
 
 ```bash
 mkdir -p cmake
-wget -O cmake/Pitchfork.cmake 'https://github.com/jessestricker/releases/download/v0.1.0/Pitchfork.cmake'
+wget -O cmake/Pitchfork.cmake 'https://github.com/jessestricker/pitchfork/releases/download/v0.1.0/Pitchfork.cmake'
 ```
 
 **PowerShell:**
 
 ```powershell
 mkdir -Force cmake
-iwr -OutFile cmake/Pitchfork.cmake 'https://github.com/jessestricker/releases/download/v0.1.0/Pitchfork.cmake'
+iwr -OutFile cmake/Pitchfork.cmake 'https://github.com/jessestricker/pitchfork/releases/download/v0.1.0/Pitchfork.cmake'
 ```
 
 After downloading, include the script into your top-level `CMakeLists.txt`.
