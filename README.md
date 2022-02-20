@@ -61,3 +61,4 @@ pf_add_executable(app LIBS utils)
 **Implementation notes:**
 
 - [Compiler options](./docs/compiler-options.md)
+- [Release process](./docs/release-process.md)
