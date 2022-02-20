@@ -54,6 +54,10 @@ function(_pf_add_build_reqs target)
 endfunction()
 
 function(pf_add_library target)
+  # parse optional args
+  cmake_parse_arguments(_arg "" "STANDARD" "" ${ARGN})
+  _pf_dbg_var(_arg_STANDARD)
+
   # construct target-specific paths
   cmake_path(SET source_dir NORMALIZE "${PROJECT_SOURCE_DIR}/src/${target}")
   cmake_path(GET source_dir PARENT_PATH include_dir)
@@ -81,6 +85,9 @@ function(pf_add_library target)
 
   # set target properties
   target_include_directories(${target} PUBLIC ${include_dir})
+  if(DEFINED _arg_STANDARD)
+    target_compile_features(${target} PUBLIC cxx_std_${_arg_STANDARD})
+  endif()
   _pf_add_build_reqs(${target})
 endfunction()
 
