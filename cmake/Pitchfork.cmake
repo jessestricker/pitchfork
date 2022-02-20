@@ -55,8 +55,10 @@ endfunction()
 
 function(pf_add_library target)
   # parse optional args
-  cmake_parse_arguments(_arg "" "STANDARD" "" ${ARGN})
+  cmake_parse_arguments(_arg "" "STANDARD" "LIBS;PRIVATE_LIBS" ${ARGN})
   _pf_dbg_var(_arg_STANDARD)
+  _pf_dbg_var(_arg_LIBS)
+  _pf_dbg_var(_arg_PRIVATE_LIBS)
 
   # construct target-specific paths
   cmake_path(SET source_dir NORMALIZE "${PROJECT_SOURCE_DIR}/src/${target}")
@@ -88,6 +90,10 @@ function(pf_add_library target)
   if(DEFINED _arg_STANDARD)
     target_compile_features(${target} PUBLIC cxx_std_${_arg_STANDARD})
   endif()
+  target_link_libraries(
+    ${target}
+    PUBLIC "${_arg_LIBS}"
+    PRIVATE "${_arg_PRIVATE_LIBS}")
   _pf_add_build_reqs(${target})
 endfunction()
 
