@@ -97,8 +97,27 @@ function(pf_add_library target)
   _pf_add_build_reqs(${target})
 endfunction()
 
-function(pf_add_example target)
-  # TODO
+function(pf_add_executable target)
+  # parse optional args
+  cmake_parse_arguments(_arg "" "STANDARD" "LIBS;PRIVATE_LIBS" ${ARGN})
+  _pf_dbg_var(_arg_STANDARD)
+  _pf_dbg_var(_arg_LIBS)
+  _pf_dbg_var(_arg_PRIVATE_LIBS)
+
+  # construct target-specific paths
+  cmake_path(SET source_file NORMALIZE "${PROJECT_SOURCE_DIR}/src/${target}.main.cpp")
+  _pf_dbg_var(source_file)
+
+  # add executable target
+  add_executable(${target} "${source_file}")
+  _pf_dbg_print("Added executable target \"${target}\"")
+
+  # set target properties
+  if(DEFINED _arg_STANDARD)
+    target_compile_features(${target} PRIVATE cxx_std_${_arg_STANDARD})
+  endif()
+  target_link_libraries(${target} PRIVATE "${_arg_PRIVATE_LIBS}" "${_arg_LIBS}")
+  _pf_add_build_reqs(${target})
 endfunction()
 
 # print build system information
