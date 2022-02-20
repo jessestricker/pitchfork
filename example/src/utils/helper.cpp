@@ -1,5 +1,5 @@
 #include "helper.hpp"
 
 namespace utils {
-  int get_number() { return 42; }
+  int get_answer() { return 42; }
 }
